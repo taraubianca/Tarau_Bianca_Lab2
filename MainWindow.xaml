@@ -4,9 +4,10 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Tarau_Bianca_Lab2"
+        xmlns:CustomCommands="clr-namespace:Tarau_Bianca_Lab2.CustomCommands"
         mc:Ignorable="d"
         Title="Virtual Doughnuts Factory" ResizeMode="NoResize" Background="{DynamicResource {x:Static SystemColors.ActiveCaptionBrushKey}}" WindowStartupLocation="CenterScreen" SizeToContent="WidthAndHeight" Loaded="frmMain_Loaded">
-    <Grid>
+    <Grid MenuItem.Click="FilledItemsShow_Click">
 
 
         <Label x:Name="lblTitle" Content="Doughnuts - Bake &amp; Sale" HorizontalAlignment="Left" Margin="314,43,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
@@ -33,15 +34,15 @@
                 <Label x:Name="lblQuantity" Content="Quantity" Canvas.Left="10" Canvas.Top="10" FontWeight="Normal"/>
                 <TextBox x:Name="txtQuantity" Canvas.Left="81" Canvas.Top="14" Text="0" TextWrapping="Wrap" Width="120" FontWeight="Normal" KeyUp="txtQuantity_KeyUp"/>
                 <Label x:Name="lblType" Content="Type" Canvas.Left="221" Canvas.Top="8" FontWeight="Normal"/>
-                <ComboBox x:Name="cmbType" Canvas.Left="269" Canvas.Top="8" Width="120"/>
+                <ComboBox x:Name="cmbType" Canvas.Left="269" Canvas.Top="8" Width="120" SelectionChanged="cmbType_SelectionChanged"/>
                 <Label x:Name="lblPrice" Content="Price" Canvas.Left="411" Canvas.Top="8" FontWeight="Normal"/>
                 <TextBox x:Name="txtPrice" Canvas.Left="460" Canvas.Top="12" Text="0" TextWrapping="Wrap" Width="120" FontWeight="Normal"/>
-                <ListBox Height="98" Width="614" Canvas.Top="46" Canvas.Left="10"/>
+                <ListBox x:Name="lstSale" Height="98" Width="614" Canvas.Top="46" Canvas.Left="10"/>
                 <Label x:Name="lblTotal" Content="Total" Canvas.Left="405" Canvas.Top="149"/>
                 <TextBox x:Name="txtTotal" Canvas.Left="460" Canvas.Top="153" Text="0" TextWrapping="Wrap" Width="164" IsReadOnly="True"/>
-                <Button x:Name="btnAddToSale" Content="Add To Sale " Canvas.Left="629" Canvas.Top="64" Height="26" Width="120" FontWeight="Normal"/>
-                <Button x:Name="btnRemoveItem" Content="Remove Item" Canvas.Left="629" Canvas.Top="104" Width="120" FontWeight="Normal"/>
-                <Button x:Name="btnCheckOut" Content="Check Out " Canvas.Left="629" Canvas.Top="153" Width="120"/>
+                <Button x:Name="btnAddToSale" Content="Add To Sale " Canvas.Left="629" Canvas.Top="64" Height="26" Width="120" FontWeight="Normal" Click="btnAdd_Click"/>
+                <Button x:Name="btnRemoveItem" Content="Remove Item" Canvas.Left="629" Canvas.Top="104" Width="120" FontWeight="Normal" Click="btnRemoveItem_Click"/>
+                <Button x:Name="btnCheckOut" Content="Check Out " Canvas.Left="629" Canvas.Top="153" Width="120" Click="btnCheckOut_Click"/>
             </Canvas>
         </GroupBox>
         <Menu  x:Name="mnuMain" HorizontalAlignment="Left" Height="21" VerticalAlignment="Top"
@@ -57,10 +58,14 @@ Click="glazedToolStripMenuItem_Click" IsCheckable="True"/>
                         <MenuItem x:Name="sugarToolStripMenuItem" Header="Sugar"
 IsCheckable="True" Click="sugarToolStripMenuItem_Click"/>
                     </MenuItem>
-                    <MenuItem Header="Filled"/>
+                    <MenuItem Header="Filled" Click="FilledItems_Click">
+                        <MenuItem x:Name="lemonFilledMenuItem" Header="Lemon" IsCheckable="True"/>
+                        <MenuItem x:Name="vanillaFilledMenuItem" Header="Vanilla" IsCheckable="True"/>
+                        <MenuItem x:Name="chocolateFilledMenuItem" Header="Chocolate" IsCheckable="True"/>
+                    </MenuItem>
                 </MenuItem>
-                <MenuItem x:Name="mnuStop" Header="Stop"
-Click="stopToolStripMenuItem_Click"/>
+                <MenuItem x:Name="mnuStop" Header="Stop" Click="stopToolStripMenuItem_Click"  />
+                <MenuItem Header="Inventory" Command="ApplicationCommands.Print"></MenuItem>
             </MenuItem>
         </Menu>
 
