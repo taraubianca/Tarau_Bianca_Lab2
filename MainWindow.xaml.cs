@@ -36,6 +36,14 @@ namespace Tarau_Bianca_Lab2
             //adaugam la colectia CommandBindings
             this.CommandBindings.Add(cmd1);
 
+            //Doughnuts>Stop
+            //comanda custom
+            CommandBinding cmd2 = new CommandBinding();
+            cmd2.Command = CustomCommands.StopCommand.Launch;
+            cmd2.Executed += new
+            ExecutedRoutedEventHandler(CtrlS_CommandHandler);//asociem handler
+            this.CommandBindings.Add(cmd2);
+
         }
 
         private DoughnutMachine myDoughnutMachine;
@@ -259,6 +267,13 @@ DoughnutMachine.DoughnutCompleteDelegate(DoughnutCompleteHandler);
             MessageBox.Show("You have in stock:" + mRaisedGlazed + " Glazed," + mRaisedSugar + 
            "Sugar, "+mFilledLemon+" Lemon, "+mFilledChocolate+" Chocolate, "+mFilledVanilla+" Vanilla"
            );
+        }
+
+        private void CtrlS_CommandHandler(object sender, ExecutedRoutedEventArgs e)
+        {
+            //handler pentru comanda Ctrl+S -> se va executa stopToolStripMenuItem_Click
+            MessageBox.Show("Ctrl+S was pressed! The doughnut machine will stop!");
+            this.stopToolStripMenuItem_Click(sender, e);
         }
 
 
